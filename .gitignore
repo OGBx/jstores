@@ -1,0 +1,25 @@
+# Dependencies and generated builds
+node_modules/
+.next/
+out/
+
+# Local secrets (commit .env.example only)
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# Runtime and debug output
+*.log
+npm-debug.log*
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# TypeScript cache
+*.tsbuildinfo
+next-env.d.ts

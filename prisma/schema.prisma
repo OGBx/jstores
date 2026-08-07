@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  DISPATCHED
+  DELIVERED
+  CANCELLED
+}
+
+model Order {
+  id          String      @id @default(cuid())
+  fullName    String
+  phone       String
+  secondPhone String?
+  state       String
+  city        String
+  address     String
+  landmark    String?
+  quantity    Int
+  total       Int
+  status      OrderStatus @default(PENDING)
+  adminNotes  String?
+  trackingRef String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  events      OrderEvent[]
+
+  @@index([status, createdAt])
+  @@index([phone])
+}
+
+model OrderEvent {
+  id        String      @id @default(cuid())
+  orderId   String
+  order     Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  status    OrderStatus?
+  note      String?
+  actor     String
+  createdAt DateTime    @default(now())
+
+  @@index([orderId, createdAt])
+}
+
+model Product {
+  id          String   @id @default("foot-massager")
+  name        String   @default("Ultimate Foot Massager")
+  description String
+  active      Boolean  @default(true)
+  price1      Int      @default(149999)
+  price2      Int      @default(294999)
+  price3      Int      @default(442999)
+  price5      Int      @default(739999)
+  updatedAt   DateTime @updatedAt
+}
+
+model Promotion {
+  id        String   @id @default("main-promotion")
+  name      String   @default("Foot Massager Promotion")
+  startsAt  DateTime
+  endsAt    DateTime
+  active    Boolean  @default(true)
+  updatedAt DateTime @updatedAt
+}
