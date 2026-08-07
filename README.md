@@ -15,6 +15,7 @@ The admin dashboard is available at `/admin`. Never commit `.env` or disclose pr
 ## Required production environment variables
 
 - `DATABASE_URL`: pooled managed PostgreSQL connection string.
+- `DIRECT_URL`: direct PostgreSQL connection used only by Prisma migrations.
 - `ADMIN_EMAIL`: administrator sign-in email.
 - `ADMIN_PASSWORD_HASH`: bcrypt hash with each `$` escaped as `\$` in local Next.js env files.
 - `ADMIN_SESSION_SECRET`: at least 32 cryptographically random bytes.
