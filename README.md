@@ -30,8 +30,8 @@ Optional:
 1. Push the repository without `.env`, `.next`, logs or `node_modules`.
 2. Provision managed PostgreSQL with connection pooling, automated backups and point-in-time recovery where available.
 3. Add production environment variables in the hosting dashboard. Generate new production secrets; do not reuse local credentials.
-4. Run `npm run migrate:deploy` against production.
-5. Deploy with `npm run build`.
+4. Run `npm run migrate:deploy` against production from a controlled migration job or administrator machine.
+5. Deploy with `npm run build`; application builds do not mutate the production database.
 6. Confirm `/api/health` returns HTTP 200.
 7. Place a complete test order and confirm dashboard, notification, status update and CSV export.
 
